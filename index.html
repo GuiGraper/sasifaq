@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Interativo - Segurança da Informação</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #004617;
+            color: #ffffff;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-menu h1 {
+            margin: 0;
+        }
+
+        .header-menu nav {
+            display: flex;
+        }
+
+        .header-menu nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .header-menu nav a:hover {
+            text-decoration: underline;
+        }
+
+        .selection-screen, .faq-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            background-color: rgb(161, 214, 181);
+            padding-top: 60px; 
+        }
+
+        .assistant-selection, .faq-content {
+            margin: 20px;
+        }
+
+        .assistant-option {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .assistant-option img {
+            width: 150px;
+            height: auto;
+        }
+
+        .faq-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer.show {
+            display: block;
+            max-height: 500px;
+        }
+
+        .back-button {
+            margin-top: 90px;
+
+        }
+
+        .virtual-assistant {
+            position: fixed; 
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 500px;
+            height: auto;
+        }
+
+        .virtual-assistant img {
+            width: 100%;
+            height: auto;
+        }
+
+        .faq-container {
+            display: none; 
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Tela de Seleção de Assistente -->
+    <div id="selection-screen" class="selection-screen">
+        <h1>Selecione um assistente para acessar as perguntas do FAQ</h1>
+        <div class="assistant-selection">
+            <div class="assistant-option" onclick="selectAssistant(1)">
+                <img src="imagens/roboandroidsemfalar.png" alt="Robo Univille">
+                <p>Robo Univille</p>    
+            </div>
+            <div class="assistant-option" onclick="selectAssistant(2)">
+                <img src="imagens/garotafechada.png" alt="Garota Estudante">
+                <p>Garota Estudante</p>
+            </div>
+            <div class="assistant-option" onclick="selectAssistant(3)">
+                <img src="imagens/homemfechado.png" alt="Garoto Estudante">
+                <p>Garoto Estudante</p>
+            </div>
+        </div>
+    </div>
+    
+   
+    <div id="faq-container" class="faq-container">
+     <header>
+            <h1>Clique em uma pergunta e o assistente irá lhe responder</h1>
+        </header>
+        
+        <div class="faq-content">
+            <div class="faq-item confiabilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(1)">1. O que é Confidencialidade?</h2>
+                <div class="faq-answer" id="answer1">
+                    <p>É uma garantia de que os dados e informações serão acessados apenas por pessoas de determinado cargo ou função.</p>
+                    <audio id="audio1">
+                        <source id="audio-source1" src="audios/audio1.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item confiabilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(2)">2. O que pode deixar a confidencialidade exposta?</h2>
+                <div class="faq-answer" id="answer2">
+                    <p>A confidencialidade pode ser comprometida por falhas de segurança que permitam algum vazamento de dados através de invasões tanto internas quanto externas.</p>
+                    <audio id="audio2">
+                        <source id="audio-source2" src="audios/audio2.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item confiabilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(3)">3. Por que a confidencialidade é importante?</h2>
+                <div class="faq-answer" id="answer3">
+                    <p>Ela é importante para evitar fraudes, roubo de informações seja de dados pessoais ou de uma empresa.</p>
+                    <audio id="audio3">
+                        <source id="audio-source3" src="audios/audio3.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item integridade">
+                <h2 class="faq-question" onclick="toggleAnswer(4)">4. O que é Integridade?</h2>
+                <div class="faq-answer" id="answer4">
+                    <p>A integridade é uma garantia de que as informações estão preservadas e livres de ameaças e alterações.</p>
+                    <audio id="audio4">
+                        <source id="audio-source4" src="audios/audio4.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item integridade">
+                <h2 class="faq-question" onclick="toggleAnswer(5)">5. Por que a integridade importa?</h2>
+                <div class="faq-answer" id="answer5">
+                    <p>A integridade é importante pois ela garante que os dados não foram alterados ou deletados, mantendo as informações de jeito que elas estão.</p>
+                    <audio id="audio5">
+                        <source id="audio-source5" src="audios/audio5.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item integridade">
+                <h2 class="faq-question" onclick="toggleAnswer(6)">6. Como é garantida a integridade?</h2>
+                <div class="faq-answer" id="answer6">
+                    <p>É garantida através de backups de arquivos, auditoria em sistemas e verificação de autenticidade.</p>
+                    <audio id="audio6">
+                        <source id="audio-source6" src="audios/audio6.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item disponibilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(7)">7. O que é Disponibilidade?</h2>
+                <div class="faq-answer" id="answer7">
+                    <p>A disponibilidade é uma garantia de que as informações e os dados sempre poderão ser acessados independente da situação.</p>
+                    <audio id="audio7">
+                        <source id="audio-source7" src="audios/audio7.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item disponibilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(8)">8. Quais são as ameaças à disponibilidade?</h2>
+                <div class="faq-answer" id="answer8">
+                    <p>Uma das principais ameaças à disponibilidade de um serviço ou sistema online são ataques DoS e DDoS.</p>
+                    <audio id="audio8">
+                        <source id="audio-source8" src="audios/audio8.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item disponibilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(9)">9. O que pode ser feito para sempre manter a Disponibilidade?</h2>
+                <div class="faq-answer" id="answer9">
+                    <p>Sites de backup com algum data center secundário, monitoramento em tempo real das funções online do servidor.</p>
+                    <audio id="audio9">
+                        <source id="audio-source9" src="audios/audio9.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item disponibilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(10)">10. O que é Autenticidade?</h2>
+                <div class="faq-answer" id="answer10">
+                    <p>A autenticidade seria a originalidade das informações, garantindo uma verificação dos dados.</p>
+                    <audio id="audio10">
+                        <source id="audio-source10" src="audios/audio10.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+            <div class="faq-item disponibilidade">
+                <h2 class="faq-question" onclick="toggleAnswer(11)">11. Qual o problema em usar um sistema não autêntico?</h2>
+                <div class="faq-answer" id="answer11">
+                    <p>Para uso corporativo, o uso de um sistema pirateado pode acarretar problemas legais e o uso de software crackeado pode colocar em risco os dados.</p>
+                    <audio id="audio11">
+                        <source id="audio-source11" src="audios/audio11.mp3" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+            </div>
+        </div>
+        <div class="virtual-assistant">
+            <img src="imagens/roboandroidsemfalar.png" alt="Assistente Virtual" id="assistant">
+        </div>
+
+        <button onclick="goBackToSelection()" class="back-button">Voltar para a escolha do assistente</button>
+    </div>
+    <footer>
+        <p>.</p>
+    </footer>
+    <script>
+        let currentAssistant = null;
+        let talkingInterval = null;
+
+        function selectAssistant(assistantNumber) {
+            document.getElementById("selection-screen").style.display = "none";
+            document.getElementById("faq-container").style.display = "flex";
+
+            var assistantImg = document.getElementById("assistant");
+            var allFaqItems = document.querySelectorAll('.faq-item');
+
+            allFaqItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            if (assistantNumber === 1) {
+                assistantImg.src = "imagens/roboandroidsemfalar.png";
+                document.querySelectorAll('.faq-item.confiabilidade').forEach(item => {
+                    item.style.display = 'block';
+                });
+            } else if (assistantNumber === 2) {
+                assistantImg.src = "imagens/garotafechada.png";
+                document.querySelectorAll('.faq-item.integridade').forEach(item => {
+                    item.style.display = 'block';
+                });
+            } else if (assistantNumber === 3) {
+                assistantImg.src = "imagens/homemfechado.png";
+                document.querySelectorAll('.faq-item.disponibilidade').forEach(item => {
+                    item.style.display = 'block';
+                });
+            }
+            currentAssistant = assistantNumber;
+            stopTalkingAnimation(); 
+        }
+
+        function goBackToSelection() {
+            document.getElementById("faq-container").style.display = "none";
+            document.getElementById("selection-screen").style.display = "flex";
+
+
+            var allAudios = document.querySelectorAll('audio');
+            allAudios.forEach(aud => {
+                aud.pause();
+                aud.currentTime = 0;
+            });
+
+            // Parar animação  
+            stopTalkingAnimation();
+        }
+
+        function toggleAnswer(id) {
+            var answer = document.getElementById('answer' + id);
+            var audio = document.getElementById('audio' + id);
+
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                audio.pause();
+                stopTalkingAnimation();
+            } else {
+                var allAnswers = document.querySelectorAll('.faq-answer');
+                allAnswers.forEach(ans => {
+                    ans.classList.remove('show');
+                });
+
+                var allAudios = document.querySelectorAll('audio');
+                allAudios.forEach(aud => {
+                    aud.pause();
+                    aud.currentTime = 0;
+                });
+
+                answer.classList.add('show');
+                audio.play();
+                startTalkingAnimation();
+
+                audio.onended = function() {
+                    stopTalkingAnimation();
+                };
+            }
+        }
+
+        function startTalkingAnimation() {
+            if (talkingInterval) {
+                clearInterval(talkingInterval);
+            }
+
+            const assistant = document.getElementById("assistant");
+            const images = {
+                1: ["imagens/roboandroidsemfalar.png", "imagens/roboandroidfalando.png"],
+                2: ["imagens/garotafechada.png", "imagens/garotafalando.png"],
+                3: ["imagens/homemfechado.png", "imagens/homemfalando.png"]
+            };
+
+            const [img1, img2] = images[currentAssistant];
+            talkingInterval = setInterval(function() {
+                assistant.src = (assistant.src.includes(img1)) ? img2 : img1;
+            }, 200);
+
+            assistant.setAttribute("data-talking-interval", talkingInterval);
+        }
+
+        function stopTalkingAnimation() {
+            if (talkingInterval) {
+                clearInterval(talkingInterval);
+                talkingInterval = null;
+                
+                const assistant = document.getElementById("assistant");
+                const images = {
+                    1: "imagens/roboandroidsemfalar.png",
+                    2: "imagens/garotafechada.png",
+                    3: "imagens/homemfechado.png"
+                };
+
+                assistant.src = images[currentAssistant];
+            }
+        }
+    </script>
+</body>
+</html>
